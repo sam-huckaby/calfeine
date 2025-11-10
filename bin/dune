@@ -1,0 +1,4 @@
+(executable
+ (public_name calfeine)
+ (name main)
+ (libraries calfeine eio eio_main cohttp-eio uri http))

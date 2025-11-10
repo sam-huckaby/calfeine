@@ -1,0 +1,14 @@
+# Calfeine whitelist file
+# List the files you want to serve, one per line
+# Only .html, .ico, and .png files are allowed
+
+index.html
+about.html
+favicon.ico
+logo.png
+samhuckaby/index.html
+samhuckaby/thought_loading.png
+samhuckaby/bluesky_media_kit_logo_transparent_1.png
+samhuckaby/LI-In-Bug.png
+samhuckaby/yt_icon_red_digital.png
+samhuckaby/podcast.png

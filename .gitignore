@@ -1,0 +1,29 @@
+# OCaml
+*.annot
+*.cmo
+*.cma
+*.cmi
+*.a
+*.o
+*.cmx
+*.cmxs
+*.cmxa
+
+# Dune
+_build/
+*.install
+*.merlin
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OPAM
+_opam/
+
+# TOP SECRET THINGS
+samhuckaby/

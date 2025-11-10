@@ -1,0 +1,3 @@
+(library
+ (name calfeine)
+ (libraries eio eio_main cohttp-eio uri http))
