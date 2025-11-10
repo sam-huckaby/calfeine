@@ -9,6 +9,7 @@ let allowed_extensions = [
   ".html"; ".htm";           (* HTML files *)
   ".css";                    (* Stylesheets *)
   ".js";                     (* JavaScript *)
+  ".json"; ".webmanifest";   (* JSON and Web App Manifest *)
   ".ico"; ".png"; ".jpg"; ".jpeg"; ".gif";  (* Images *)
   ".woff"; ".woff2"; ".ttf"; ".otf"; ".eot" (* Fonts *)
 ]
@@ -43,6 +44,8 @@ let get_mime_type filename =
   if Filename.check_suffix filename ".html" || Filename.check_suffix filename ".htm" then "text/html"
   else if Filename.check_suffix filename ".css" then "text/css"
   else if Filename.check_suffix filename ".js" then "application/javascript"
+  else if Filename.check_suffix filename ".json" then "application/json"
+  else if Filename.check_suffix filename ".webmanifest" then "application/manifest+json"
   else if Filename.check_suffix filename ".png" then "image/png"
   else if Filename.check_suffix filename ".jpg" || Filename.check_suffix filename ".jpeg" then "image/jpeg"
   else if Filename.check_suffix filename ".gif" then "image/gif"
