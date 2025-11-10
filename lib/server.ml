@@ -1,13 +1,13 @@
 (* HTTP server implementation using Eio and Cohttp *)
 
-let handle_request ~fs ~whitelist _conn request _body =
+let handle_request ~fs ~allowlist _conn request _body =
   let uri = Http.Request.resource request in
   let path = Uri.path (Uri.of_string uri) in
   
   (* Default to index.html for root path *)
   let path = if path = "/" then "/index.html" else path in
   
-  if Whitelist.is_allowed whitelist path then begin
+  if Allowlist.is_allowed allowlist path then begin
     (* Remove leading slash for filesystem access *)
     let file_path = if String.starts_with ~prefix:"/" path then
       String.sub path 1 (String.length path - 1)
@@ -15,7 +15,7 @@ let handle_request ~fs ~whitelist _conn request _body =
     
     try
       let content = Eio.Path.(load (fs / file_path)) in
-      let mime_type = Whitelist.get_mime_type file_path in
+      let mime_type = Allowlist.get_mime_type file_path in
       let headers = Http.Header.of_list [
         ("Content-Type", mime_type);
       ] in
@@ -29,10 +29,10 @@ let handle_request ~fs ~whitelist _conn request _body =
     Cohttp_eio.Server.respond_string ~status:`Not_found ~body:"404 Not Found" ()
   end
 
-let run ~sw ~net ~fs ~port ~whitelist_file =
-  let whitelist = Whitelist.load_whitelist ~fs whitelist_file in
-  Printf.printf "Loaded %d files from whitelist\n%!" 
-    (Whitelist.StringSet.cardinal whitelist);
+let run ~sw ~net ~fs ~port ~allowlist_file =
+  let allowlist = Allowlist.load_allowlist ~fs allowlist_file in
+  Printf.printf "Loaded %d files from allowlist\n%!" 
+    (Allowlist.StringSet.cardinal allowlist);
   
   let socket = 
     Eio.Net.listen net ~sw ~reuse_addr:true ~backlog:128
@@ -41,7 +41,7 @@ let run ~sw ~net ~fs ~port ~whitelist_file =
   
   Printf.printf "Calfeine server listening on http://127.0.0.1:%d\n%!" port;
   
-  let server = Cohttp_eio.Server.make ~callback:(handle_request ~fs ~whitelist) () in
+  let server = Cohttp_eio.Server.make ~callback:(handle_request ~fs ~allowlist) () in
   Cohttp_eio.Server.run socket server ~on_error:(fun exn ->
     Printf.eprintf "Server error: %s\n%!" (Printexc.to_string exn)
   )

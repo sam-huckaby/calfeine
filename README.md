@@ -4,7 +4,7 @@ A simple, fast OCaml web server built with Eio that only serves designated files
 
 ## Features
 
-- **Designated serving**: Only files listed in `files.site` are served
+- **Allowlist-based serving**: Only files listed in `files.site` are served
 - **File type restrictions**: Only `.html`, `.ico`, and `.png` files allowed
 - **Eio-powered**: Uses modern effects-based concurrency for high performance
 - **Simple configuration**: Plain text newline-separated list of files allowed to be served

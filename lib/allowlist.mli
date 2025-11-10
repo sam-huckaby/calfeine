@@ -1,4 +1,4 @@
-(* Interface for whitelist management *)
+(* Interface for allowlist management *)
 
 module StringSet : Set.S with type elt = string
 
@@ -10,11 +10,11 @@ val allowed_extensions : string list
 val has_allowed_extension : string -> bool
 (** Check if a filename has an allowed extension *)
 
-val load_whitelist : fs:_ Eio.Path.t -> string -> t
-(** Load whitelist from a file *)
+val load_allowlist : fs:_ Eio.Path.t -> string -> t
+(** Load allowlist from a file *)
 
 val is_allowed : t -> string -> bool
-(** Check if a path is in the whitelist *)
+(** Check if a path is in the allowlist *)
 
 val get_mime_type : string -> string
 (** Get MIME type based on file extension *)

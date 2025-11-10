@@ -15,8 +15,8 @@
 
 (package
  (name calfeine)
- (synopsis "A simple OCaml web server with file whitelisting")
- (description "An nginx-like web server that serves files based on a whitelist in files.site")
+ (synopsis "A simple OCaml web server with file allowlisting")
+ (description "An nginx-like web server that serves files based on an allowlist in files.site")
  (depends
   ocaml
   dune

@@ -5,6 +5,6 @@ val run :
   net:_ Eio.Net.t ->
   fs:_ Eio.Path.t ->
   port:int ->
-  whitelist_file:string ->
+  allowlist_file:string ->
   unit
 (** Start the HTTP server *)

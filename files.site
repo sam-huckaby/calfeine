@@ -1,4 +1,4 @@
-# Calfeine whitelist file
+# Calfeine allowlist file
 # List the files you want to serve, one per line
 # Only .html, .ico, and .png files are allowed
 

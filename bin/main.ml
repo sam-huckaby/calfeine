@@ -2,12 +2,12 @@
 
 let () =
   let port = ref 8080 in
-  let whitelist_file = ref "files.site" in
+  let allowlist_file = ref "files.site" in
   
   let usage_msg = "calfeine [options]" in
   let specs = [
     ("-p", Arg.Set_int port, "Port to listen on (default: 8080)");
-    ("-f", Arg.Set_string whitelist_file, "Whitelist file (default: files.site)");
+    ("-f", Arg.Set_string allowlist_file, "Allowlist file (default: files.site)");
   ] in
   
   Arg.parse specs (fun _ -> ()) usage_msg;
@@ -22,4 +22,4 @@ let () =
         ~net:env#net
         ~fs:env#cwd
         ~port:!port
-        ~whitelist_file:!whitelist_file
+        ~allowlist_file:!allowlist_file
