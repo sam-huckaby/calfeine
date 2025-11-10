@@ -1,13 +1,13 @@
 # Calfeine
 
-A simple, fast OCaml web server built with Eio that serves files based on a whitelist.
+A simple, fast OCaml web server built with Eio that only serves designated files.
 
 ## Features
 
-- **Whitelist-based serving**: Only files listed in `files.site` are served
+- **Designated serving**: Only files listed in `files.site` are served
 - **File type restrictions**: Only `.html`, `.ico`, and `.png` files allowed
 - **Eio-powered**: Uses modern effects-based concurrency for high performance
-- **Simple configuration**: Plain text newline-separated whitelist
+- **Simple configuration**: Plain text newline-separated list of files allowed to be served
 - **Automatic 404s**: Any unlisted file returns 404 Not Found
 
 ## Installation
@@ -35,17 +35,17 @@ dune install
 ### Basic usage
 
 ```bash
-# Start the server (default: port 8080, whitelist: files.site)
+# Start the server (default: port 8080, allowed files: files.site)
 calfeine
 
 # Custom port
 calfeine -p 3000
 
-# Custom whitelist file
+# Custom list of allowed files
 calfeine -f myfiles.list
 ```
 
-### Creating a whitelist
+### Creating the list of files to serve
 
 Create a `files.site` file in your project directory:
 
@@ -58,12 +58,12 @@ favicon.ico
 logo.png
 ```
 
-**Important**: Only files with `.html`, `.ico`, or `.png` extensions will be served, even if listed in the whitelist.
+**Important**: Only files with `.html`, `.ico`, or `.png` extensions will be served, even if listed in our file list.
 
 ### Example
 
 ```bash
-# Create your whitelist
+# Create your list of files to serve
 echo "index.html" > files.site
 echo "logo.png" >> files.site
 
@@ -80,14 +80,14 @@ calfeine
 
 1. Server reads `files.site` on startup and loads allowed filenames
 2. Only files with `.html`, `.ico`, or `.png` extensions are allowed
-3. Each HTTP request is checked against the whitelist
-4. If the file is whitelisted and exists, it's served with proper MIME type
+3. Each HTTP request is checked against the list of allowed files
+4. If the file is allowed and exists, it's served with proper MIME type
 5. Otherwise, returns 404 Not Found
 
 ## Security
 
 - **No directory traversal**: Paths are validated before serving
-- **Explicit whitelist**: Files must be explicitly listed to be served
+- **Explicit allow**: Files must be explicitly listed to be served
 - **Extension validation**: Only approved file types are served
 - **No SSL/TLS yet**: This is an HTTP-only server (for now)
 
